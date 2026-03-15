@@ -3,6 +3,7 @@
     cars: 'fresh_cars',
     cart: 'fresh_cart',
     favorites: 'fresh_favorites',
+    testDrives: 'fresh_test_drives',
     users: 'fresh_users',
     session: 'fresh_session'
   };
@@ -66,6 +67,11 @@
       save(STORAGE_KEYS.favorites, []);
     }
 
+    const testDrives = load(STORAGE_KEYS.testDrives, null);
+    if (!Array.isArray(testDrives)) {
+      save(STORAGE_KEYS.testDrives, []);
+    }
+
     const users = load(STORAGE_KEYS.users, null);
     if (!Array.isArray(users)) {
       save(STORAGE_KEYS.users, []);
@@ -86,6 +92,10 @@
 
   function getSession() {
     return load(STORAGE_KEYS.session, null);
+  }
+
+  function getTestDrives() {
+    return load(STORAGE_KEYS.testDrives, []);
   }
 
   function getUsers() {
@@ -273,11 +283,48 @@
     const featured = document.querySelector('[data-featured]');
     const brandList = document.querySelector('[data-brand-list]');
     const findForm = document.querySelector('[data-find-form]');
+    const newsletterForm = document.querySelector('[data-newsletter-form]');
+    const heroCarousel = document.querySelector('[data-hero-carousel]');
     const searchInput = document.querySelector('[data-home-search]');
     const brandSelect = document.querySelector('[data-home-brand]');
     const modelSelect = document.querySelector('[data-home-model]');
 
     const cars = getCars();
+    let heroTimer = null;
+
+    function initHeroCarousel() {
+      if (!heroCarousel) {
+        return;
+      }
+      const slides = [...heroCarousel.querySelectorAll('.m-hero-slide')];
+      const dots = [...heroCarousel.querySelectorAll('[data-hero-to]')];
+      if (slides.length <= 1) {
+        return;
+      }
+
+      let activeIndex = 0;
+      function goTo(index) {
+        activeIndex = (index + slides.length) % slides.length;
+        slides.forEach((slide, idx) => {
+          slide.classList.toggle('is-active', idx === activeIndex);
+        });
+        dots.forEach((dot, idx) => {
+          dot.classList.toggle('active', idx === activeIndex);
+        });
+      }
+
+      dots.forEach((dot) => {
+        dot.addEventListener('click', () => {
+          goTo(Number(dot.getAttribute('data-hero-to')) || 0);
+        });
+      });
+
+      heroTimer = setInterval(() => {
+        goTo(activeIndex + 1);
+      }, 4200);
+    }
+
+    initHeroCarousel();
 
     function renderFeatured(carsToRender) {
       if (!featured) {
@@ -338,6 +385,26 @@
         window.location.href = `catalog.html${params.toString() ? `?${params.toString()}` : ''}`;
       });
     }
+
+    if (newsletterForm) {
+      newsletterForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const formData = new FormData(newsletterForm);
+        const email = String(formData.get('email') || '').trim();
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+          showToast('Введите корректный email');
+          return;
+        }
+        showToast('Подписка оформлена');
+        newsletterForm.reset();
+      });
+    }
+
+    window.addEventListener('beforeunload', () => {
+      if (heroTimer) {
+        clearInterval(heroTimer);
+      }
+    });
   }
 
   function initCatalogPage() {
@@ -869,12 +936,16 @@
       return;
     }
 
+    const pageUrl = new URL(window.location.href);
+    const focusTestDrive = pageUrl.searchParams.get('tab') === 'test-drive';
+
     const session = getSession();
     if (!session || !session.email) {
       root.innerHTML = `
         <section class="profile-card">
           <h1 class="section-title">Личный кабинет</h1>
           <p class="profile-subtitle">Для доступа к кабинету выполните вход.</p>
+          <p class="profile-subtitle">После входа вы сможете записаться на тест-драйв и видеть все свои заявки.</p>
           <a class="btn btn-primary" href="register.html">Войти или зарегистрироваться</a>
         </section>
       `;
@@ -882,8 +953,15 @@
     }
 
     function render() {
+      const cars = getCars();
       const favorites = getFavorites();
       const favoriteCars = getCars().filter((car) => favorites.includes(car.id));
+      const emailNorm = String(session.email || '').toLowerCase();
+      const userDrives = getTestDrives()
+        .filter((item) => String(item.userEmail || '').toLowerCase() === emailNorm)
+        .sort((a, b) => Number(b.createdAt || 0) - Number(a.createdAt || 0));
+      const today = new Date();
+      const todayStr = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}`;
 
       root.innerHTML = `
         <section class="profile-card">
@@ -909,6 +987,44 @@
           <div class="profile-actions">
             <a class="btn btn-outline" href="catalog.html">В каталог</a>
             <button class="btn btn-primary" type="button" data-profile-logout>Выйти</button>
+          </div>
+        </section>
+
+        <section class="profile-card profile-test-drive" data-test-drive-section>
+          <h2 class="section-title">Запись на тест-драйв</h2>
+          <form class="simple-form profile-testdrive-form" data-test-drive-form>
+            <select name="carId" required>
+              <option value="">Выберите автомобиль</option>
+              ${cars.map((car) => `<option value="${car.id}">${car.brand} ${car.model}, ${car.year}</option>`).join('')}
+            </select>
+            <div class="profile-testdrive-row">
+              <input type="date" name="date" min="${todayStr}" required />
+              <input type="time" name="time" required />
+            </div>
+            <input type="text" name="place" placeholder="Город/салон (например, Казань, Победы 141)" required />
+            <textarea name="comment" rows="3" placeholder="Комментарий (необязательно)"></textarea>
+            <button class="btn btn-primary" type="submit">Записаться на тест-драйв</button>
+          </form>
+          <div class="profile-testdrive-list">
+            <h3>Мои записи</h3>
+            ${
+              userDrives.length
+                ? userDrives.map((item) => `
+                  <article class="profile-drive-item">
+                    <div>
+                      <strong>${item.carTitle}</strong>
+                      <p>${item.date} в ${item.time}</p>
+                      <p>${item.place}</p>
+                      ${item.comment ? `<p>${item.comment}</p>` : ''}
+                    </div>
+                    <div class="profile-drive-meta">
+                      <span>${item.status || 'Новая'}</span>
+                      <button class="btn btn-outline" type="button" data-drive-delete="${item.id}">Отменить</button>
+                    </div>
+                  </article>
+                `).join('')
+                : '<p class="empty">Записей на тест-драйв пока нет.</p>'
+            }
           </div>
         </section>
 
@@ -943,12 +1059,69 @@
         });
       }
 
+      const testDriveForm = root.querySelector('[data-test-drive-form]');
+      if (testDriveForm) {
+        testDriveForm.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const form = new FormData(testDriveForm);
+          const carId = Number(form.get('carId'));
+          const date = String(form.get('date') || '').trim();
+          const time = String(form.get('time') || '').trim();
+          const place = String(form.get('place') || '').trim();
+          const comment = String(form.get('comment') || '').trim();
+          const car = getCars().find((item) => item.id === carId);
+
+          if (!car || !date || !time || !place) {
+            showToast('Заполните форму полностью');
+            return;
+          }
+
+          const next = getTestDrives();
+          next.push({
+            id: Date.now(),
+            userEmail: session.email,
+            carId: car.id,
+            carTitle: `${car.brand} ${car.model}, ${car.year}`,
+            date,
+            time,
+            place,
+            comment,
+            status: 'Новая',
+            createdAt: Date.now()
+          });
+          save(STORAGE_KEYS.testDrives, next);
+          showToast('Запись на тест-драйв создана');
+          render();
+        });
+      }
+
+      root.querySelectorAll('[data-drive-delete]').forEach((button) => {
+        button.addEventListener('click', () => {
+          const driveId = Number(button.getAttribute('data-drive-delete'));
+          const email = String(session.email || '').toLowerCase();
+          const next = getTestDrives().filter((item) => {
+            const isOwner = String(item.userEmail || '').toLowerCase() === email;
+            return !(isOwner && Number(item.id) === driveId);
+          });
+          save(STORAGE_KEYS.testDrives, next);
+          showToast('Запись отменена');
+          render();
+        });
+      });
+
       bindFavoriteButtons(root);
       root.querySelectorAll('.profile-fav-item [data-favorite]').forEach((button) => {
         button.addEventListener('click', () => {
           setTimeout(render, 0);
         });
       });
+
+      if (focusTestDrive) {
+        const section = root.querySelector('[data-test-drive-section]');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
     }
 
     render();
@@ -1016,6 +1189,8 @@
           save(STORAGE_KEYS.cart, nextCart);
           const nextFavorites = getFavorites().filter((item) => item !== id);
           save(STORAGE_KEYS.favorites, nextFavorites);
+          const nextDrives = getTestDrives().filter((item) => Number(item.carId) !== id);
+          save(STORAGE_KEYS.testDrives, nextDrives);
           renderTable();
           updateCartBadge();
           setStatus(`Авто ID ${id} удалено`);

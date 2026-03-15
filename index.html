@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260315" />
 </head>
 <body data-page="home">
   <main class="site m-home">
@@ -15,7 +15,7 @@
       <div class="header-row">
         <a class="logo" href="index.html">VELARO</a>
         <div class="cart-pill">Корзина: <strong data-cart-count>0</strong></div>
-        <button class="menu-btn" type="button" data-menu-toggle>☰</button>
+        <button class="menu-btn" type="button" data-menu-toggle>&#9776;</button>
       </div>
       <nav class="nav" data-main-nav>
         <a class="nav-link" href="catalog.html">Каталог</a>
@@ -27,25 +27,36 @@
     </header>
 
     <label class="m-search m-card">
-      <span>🔍</span>
+      <span>&#128269;</span>
       <input type="text" placeholder="Поиск" data-home-search />
     </label>
 
-    <section class="m-hero m-card">
-      <img class="m-hero-image" src="assets/hero-banner.webp" alt="Баннер VELARO" />
-      <h1>Здесь машины<br>продают быстро!<br>VELARO</h1>
+    <section class="m-hero m-card" data-hero-carousel>
+      <div class="m-hero-track" data-hero-track>
+        <article class="m-hero-slide m-hero-slide-main is-active">
+          <img class="m-hero-image" src="assets/hero-banner.webp" alt="Баннер VELARO" />
+          <h1>Здесь машины<br>продают быстро!<br>VELARO</h1>
+        </article>
+        <article class="m-hero-slide m-hero-slide-image">
+          <img class="m-hero-image m-hero-image-second" src="assets/hero-banner2.webp" alt="Большой выбор авто VELARO" />
+        </article>
+      </div>
+      <div class="m-hero-dots" data-hero-dots>
+        <button class="m-hero-dot active" type="button" aria-label="Слайд 1" data-hero-to="0"></button>
+        <button class="m-hero-dot" type="button" aria-label="Слайд 2" data-hero-to="1"></button>
+      </div>
     </section>
 
     <section class="m-filter m-card">
       <form data-find-form>
         <div class="m-field">
-          <span>🔎</span>
+          <span>&#128269;</span>
           <select name="brand" data-home-brand>
             <option value="">Марка</option>
           </select>
         </div>
         <div class="m-field">
-          <span>⚙</span>
+          <span>&#9881;</span>
           <select name="model" data-home-model>
             <option value="">Модель</option>
           </select>
@@ -77,6 +88,12 @@
       </div>
       <button class="btn btn-primary" type="button">Оценить авто</button>
       <button class="m-eval-link" type="button">Не знаю госномер</button>
+    </section>
+
+    <section class="m-testdrive-home m-card">
+      <h3>Запись на тест-драйв</h3>
+      <p>Выберите автомобиль и удобное время. Записи и статус заявок доступны в личном кабинете.</p>
+      <a class="btn btn-primary" href="profile.html?tab=test-drive">Перейти к записи</a>
     </section>
 
     <section class="m-promo m-card">
@@ -121,28 +138,50 @@
       <div class="m-note">Безопасная сделка и документы под ключ</div>
     </section>
 
+    <section class="m-newsletter m-card">
+      <h3>Подписка на рассылку</h3>
+      <p>Получайте новые поступления авто и специальные предложения первыми.</p>
+      <form class="m-newsletter-form" data-newsletter-form>
+        <input type="email" name="email" placeholder="Ваш email" required />
+        <button class="btn btn-primary" type="submit">Подписаться</button>
+      </form>
+    </section>
+
         <footer class="m-footer m-card">
-      <a class="logo" href="index.html">VELARO</a>
-      <div class="m-footer-grid">
-        <div>
-          <h5>Навигация</h5>
-          <a href="index.html">Главная</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="cart.html">Корзина</a>
-        </div>
-        <div>
-          <h5>Сайт</h5>
-          <a href="register.html">Регистрация</a>
-          <a href="profile.html">Личный кабинет</a>
-          <a href="admin.html">Админ</a>
-        </div>
-      </div>
-      <p>© 2026 VELARO. Все права защищены.</p>
-    </footer>
+  <a class="logo" href="index.html">VELARO</a>
+  <div class="m-footer-grid">
+    <div>
+      <h5>Навигация</h5>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="cart.html">Корзина</a>
+    </div>
+    <div>
+      <h5>Сайт</h5>
+      <a href="register.html">Регистрация</a>
+      <a href="profile.html">Личный кабинет</a>
+      <a href="admin.html">Админ</a>
+    </div>
+  </div>
+  <div class="m-footer-map">
+    <h5>Где нас найти</h5>
+    <div class="m-map-frame">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=49.038%2C55.751%2C49.206%2C55.838&amp;layer=mapnik"
+        title="Карта: где нас найти"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p class="m-map-caption">Казань, проспект Победы, 141</p>
+  </div>
+  <p class="m-footer-copy">© 2026 VELARO. Все права защищены.</p>
+</footer>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260315"></script>
 </body>
 </html>
+
+
 
 
 

@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260315" />
 </head>
 <body data-page="profile">
   <main class="site">
@@ -16,7 +16,7 @@
       <div class="header-row">
         <a class="logo" href="index.html">VELARO</a>
         <div class="cart-pill">Корзина: <strong data-cart-count>0</strong></div>
-        <button class="menu-btn" type="button" data-menu-toggle>≡</button>
+        <button class="menu-btn" type="button" data-menu-toggle>&#9776;</button>
       </div>
             <nav class="nav" data-main-nav>
         <a class="nav-link" href="catalog.html">Каталог</a>
@@ -32,25 +32,39 @@
 
     <!-- Подвал сайта -->
         <footer class="m-footer m-card">
-      <a class="logo" href="index.html">VELARO</a>
-      <div class="m-footer-grid">
-        <div>
-          <h5>Навигация</h5>
-          <a href="index.html">Главная</a>
-          <a href="catalog.html">Каталог</a>
-          <a href="cart.html">Корзина</a>
-        </div>
-        <div>
-          <h5>Сайт</h5>
-          <a href="register.html">Регистрация</a>
-          <a href="profile.html">Личный кабинет</a>
-          <a href="admin.html">Админ</a>
-        </div>
-      </div>
-      <p>© 2026 VELARO. Все права защищены.</p>
-    </footer>
+  <a class="logo" href="index.html">VELARO</a>
+  <div class="m-footer-grid">
+    <div>
+      <h5>Навигация</h5>
+      <a href="index.html">Главная</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="cart.html">Корзина</a>
+    </div>
+    <div>
+      <h5>Сайт</h5>
+      <a href="register.html">Регистрация</a>
+      <a href="profile.html">Личный кабинет</a>
+      <a href="admin.html">Админ</a>
+    </div>
+  </div>
+  <div class="m-footer-map">
+    <h5>Где нас найти</h5>
+    <div class="m-map-frame">
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=49.038%2C55.751%2C49.206%2C55.838&amp;layer=mapnik"
+        title="Карта: где нас найти"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    <p class="m-map-caption">Казань, проспект Победы, 141</p>
+  </div>
+  <p class="m-footer-copy">© 2026 VELARO. Все права защищены.</p>
+</footer>
   </main>
-  <script src="app.js"></script>
+  <script src="app.js?v=20260315"></script>
 </body>
 </html>
+
+
+
 

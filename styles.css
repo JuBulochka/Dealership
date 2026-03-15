@@ -578,13 +578,36 @@ body[data-page="home"] .site {
 .m-hero {
   position: relative;
   overflow: hidden;
-  min-height: 172px;
+  min-height: 186px;
   background: #2b63ff;
   color: #fff;
-  padding: 12px 12px 10px;
+  padding: 0;
 }
 
-.m-hero::before {
+.m-hero-track {
+  position: relative;
+  min-height: 186px;
+}
+
+.m-hero-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.45s ease;
+}
+
+.m-hero-slide.is-active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+.m-hero-slide-main {
+  padding: 12px;
+}
+
+.m-hero-slide-main::before {
   content: "";
   position: absolute;
   inset: 0;
@@ -604,7 +627,7 @@ body[data-page="home"] .site {
   z-index: 0;
 }
 
-.m-hero h1 {
+.m-hero-slide-main h1 {
   position: relative;
   z-index: 2;
   margin: 0;
@@ -616,7 +639,43 @@ body[data-page="home"] .site {
   padding: 2px 6px 4px 0;
   border-radius: 8px;
   text-shadow: 0 2px 10px rgba(0, 0, 0, 0.22);
+}
 
+.m-hero-image-second {
+  object-fit: contain;
+  object-position: center;
+  background: #1f4ef7;
+}
+
+.m-hero-slide-image {
+  background: #1f4ef7;
+}
+
+.m-hero-dots {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  z-index: 3;
+}
+
+.m-hero-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 0;
+  cursor: pointer;
+}
+
+.m-hero-dot.active {
+  width: 18px;
+  border-radius: 99px;
+  background: #fff;
 }
 
 .m-tags {
@@ -1046,6 +1105,55 @@ body[data-page="home"] .site {
   padding: 9px;
 }
 
+.m-testdrive-home {
+  padding: 12px;
+  background: linear-gradient(180deg, #edf3ff 0%, #e6eefc 100%);
+}
+
+.m-testdrive-home h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.m-testdrive-home p {
+  margin: 7px 0 10px;
+  font-size: 12px;
+  color: #5c6779;
+}
+
+.m-testdrive-home .btn {
+  width: 100%;
+}
+
+.m-newsletter {
+  padding: 12px;
+  background: linear-gradient(180deg, #f7faff 0%, #eef3fb 100%);
+}
+
+.m-newsletter h3 {
+  margin: 0;
+  font-size: 18px;
+}
+
+.m-newsletter p {
+  margin: 6px 0 10px;
+  font-size: 12px;
+  color: #5d687b;
+}
+
+.m-newsletter-form {
+  display: grid;
+  gap: 8px;
+}
+
+.m-newsletter-form input {
+  border: 1px solid #d3ddec;
+  border-radius: 10px;
+  padding: 10px;
+  font-size: 13px;
+  width: 100%;
+}
+
 .m-footer {
   background: #222a37;
   padding: 12px;
@@ -1075,7 +1183,38 @@ body[data-page="home"] .site {
   font-size: 11px;
 }
 
-.m-footer p {
+.m-footer-map {
+  margin-top: 10px;
+}
+
+.m-footer-map h5 {
+  margin: 0 0 6px;
+  font-size: 12px;
+  color: #e6eeff;
+}
+
+.m-map-frame {
+  height: 112px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #3a465a;
+  background: #1a2230;
+}
+
+.m-map-frame iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+.m-map-caption {
+  margin: 6px 0 0;
+  color: #b7c2d7;
+  font-size: 11px;
+}
+
+.m-footer-copy {
   margin: 8px 0 0;
   color: #8b96aa;
   font-size: 10px;
@@ -1630,4 +1769,63 @@ body[data-page="product"] .site {
   display: grid;
   gap: 6px;
   justify-items: end;
+}
+
+.profile-testdrive-form {
+  gap: 8px;
+}
+
+.profile-testdrive-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.profile-testdrive-list {
+  margin-top: 12px;
+}
+
+.profile-testdrive-list h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.profile-drive-item {
+  border: 1px solid #d9e2ee;
+  border-radius: 10px;
+  background: #f7faff;
+  padding: 8px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+}
+
+.profile-drive-item + .profile-drive-item {
+  margin-top: 8px;
+}
+
+.profile-drive-item strong {
+  font-size: 13px;
+}
+
+.profile-drive-item p {
+  margin: 4px 0 0;
+  font-size: 12px;
+  color: #5f6d85;
+}
+
+.profile-drive-meta {
+  display: grid;
+  align-content: space-between;
+  justify-items: end;
+  gap: 8px;
+}
+
+.profile-drive-meta span {
+  border-radius: 999px;
+  background: #e8eefc;
+  color: #2f4fa7;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 9px;
 }
