@@ -1,0 +1,148 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VELARO - Главная</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="home">
+  <main class="site m-home">
+    <header class="panel header">
+      <div class="header-row">
+        <a class="logo" href="index.html">VELARO</a>
+        <div class="cart-pill">Корзина: <strong data-cart-count>0</strong></div>
+        <button class="menu-btn" type="button" data-menu-toggle>☰</button>
+      </div>
+      <nav class="nav" data-main-nav>
+        <a class="nav-link" href="catalog.html">Каталог</a>
+        <a class="nav-link" href="cart.html">Корзина</a>
+        <a class="nav-link" href="register.html">Регистрация</a>
+        <a class="nav-link" href="admin.html">Админ</a>
+      </nav>
+    </header>
+
+    <label class="m-search m-card">
+      <span>🔍</span>
+      <input type="text" placeholder="Поиск" data-home-search />
+    </label>
+
+    <section class="m-hero m-card">
+      <img class="m-hero-image" src="assets/hero-banner.webp" alt="Баннер VELARO" />
+      <h1>Здесь машины<br>продают быстро!<br>VELARO</h1>
+    </section>
+
+    <section class="m-filter m-card">
+      <form data-find-form>
+        <div class="m-field">
+          <span>🔎</span>
+          <select name="brand" data-home-brand>
+            <option value="">Марка</option>
+          </select>
+        </div>
+        <div class="m-field">
+          <span>⚙</span>
+          <select name="model" data-home-model>
+            <option value="">Модель</option>
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Найти машину</button>
+      </form>
+    </section>
+
+    <section class="m-brands m-card">
+      <div class="m-brand-grid chips" data-brand-list></div>
+    </section>
+
+    <section class="m-catalog m-card">
+      <div class="m-catalog-row cards" data-featured></div>
+    </section>
+
+    <section class="m-eval m-card">
+      <h2>Оцените своё авто<br>за 2 минуты</h2>
+      <p class="m-eval-sub">Введите госномер и узнайте актуальную стоимость автомобиля на рынке</p>
+      <div class="m-eval-visual" aria-hidden="true">
+        <img src="assets/ocenka.webp" alt="" />
+      </div>
+      <div class="m-plate">
+        <input type="text" placeholder="X999XX999" />
+        <div class="m-plate-region">
+          <span class="m-plate-flag"></span>
+          <span>RUS</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" type="button">Оценить авто</button>
+      <button class="m-eval-link" type="button">Не знаю госномер</button>
+    </section>
+
+    <section class="m-promo m-card">
+      <img class="m-promo-image" src="assets/promo/buyout.png" alt="Срочный выкуп авто" />
+      <h3>Срочно выкупим ваш авто</h3>
+      <p>Проверим и выкупим машину за 1 день по рыночной цене.</p>
+      <a href="catalog.html">Подробнее</a>
+    </section>
+
+    <section class="m-promo m-card">
+      <img class="m-promo-image" src="assets/promo/listing.png" alt="Размещение объявления" />
+      <h3>Размещение объявления</h3>
+      <p>Быстрая публикация и поток заинтересованных покупателей.</p>
+      <a href="catalog.html">Подробнее</a>
+    </section>
+
+    <section class="m-promo m-card">
+      <img class="m-promo-image" src="assets/promo/safe-deal.png" alt="Безопасная сделка" />
+      <h3>Безопасная сделка</h3>
+      <p>Юридическая проверка, договор и прозрачные условия покупки.</p>
+      <a href="catalog.html">Подробнее</a>
+    </section>
+
+    <section class="m-app m-card">
+      <h3>Приложение VELARO</h3>
+      <p>Покупайте и продавайте авто прямо с телефона, без лишних звонков.</p>
+      <div class="m-app-buttons">
+        <button class="btn m-store" type="button">App Store</button>
+        <button class="btn m-store" type="button">Google Play</button>
+      </div>
+    </section>
+
+    <section class="m-text m-card">
+      <h4>Продать авто быстро и выгодно</h4>
+      <p>VELARO помогает продать автомобиль без лишних шагов. Мы берём на себя подготовку, фото, размещение и общение с покупателями.</p>
+      <p>Вы получаете прозрачную сделку и справедливую оценку с юридической поддержкой.</p>
+    </section>
+
+    <section class="m-text m-card">
+      <h4>Преимущества автомобильного маркетплейса VELARO</h4>
+      <div class="m-note">Проверка автомобиля перед публикацией</div>
+      <div class="m-note">Безопасная сделка и документы под ключ</div>
+    </section>
+
+        <footer class="m-footer m-card">
+      <a class="logo" href="index.html">VELARO</a>
+      <div class="m-footer-grid">
+        <div>
+          <h5>Навигация</h5>
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="cart.html">Корзина</a>
+        </div>
+        <div>
+          <h5>Сайт</h5>
+          <a href="register.html">Регистрация</a>
+          <a href="admin.html">Админ</a>
+          <a href="product.html?id=1">Товар</a>
+        </div>
+      </div>
+      <p>© 2026 VELARO. Все права защищены.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+

@@ -1,0 +1,70 @@
+﻿<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VELARO - Каталог</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body data-page="catalog">
+  <main class="site">
+    <header class="panel header">
+      <div class="header-row">
+        <a class="logo" href="index.html">VELARO</a>
+        <div class="cart-pill">Корзина: <strong data-cart-count>0</strong></div>
+        <button class="menu-btn" type="button" data-menu-toggle>≡</button>
+      </div>
+      <nav class="nav" data-main-nav>        <a class="nav-link active" href="catalog.html">Каталог</a>
+        <a class="nav-link" href="cart.html">Корзина</a>
+        <a class="nav-link" href="register.html">Регистрация</a>
+        <a class="nav-link" href="admin.html">Админ</a>
+      </nav>
+    </header>
+
+    <section class="panel section">
+      <h1 class="section-title">Каталог автомобилей</h1>
+      <form class="simple-form" data-catalog-filter>
+        <select name="brand" data-catalog-brand>
+          <option value="">Все марки</option>
+        </select>
+        <select name="model" data-catalog-model>
+          <option value="">Все модели</option>
+        </select>
+        <button class="btn btn-primary" type="submit">Применить фильтр</button>
+      </form>
+    </section>
+
+    <section class="panel section">
+      <div class="cards" data-catalog-list></div>
+      <div class="catalog-pagination" data-catalog-pagination></div>
+    </section>
+
+        <footer class="m-footer m-card">
+      <a class="logo" href="index.html">VELARO</a>
+      <div class="m-footer-grid">
+        <div>
+          <h5>Навигация</h5>
+          <a href="index.html">Главная</a>
+          <a href="catalog.html">Каталог</a>
+          <a href="cart.html">Корзина</a>
+        </div>
+        <div>
+          <h5>Сайт</h5>
+          <a href="register.html">Регистрация</a>
+          <a href="admin.html">Админ</a>
+          <a href="product.html?id=1">Товар</a>
+        </div>
+      </div>
+      <p>© 2026 VELARO. Все права защищены.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
+
+
+
+
