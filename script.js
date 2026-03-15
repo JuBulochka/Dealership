@@ -173,4 +173,8 @@ socialButtons.forEach((button) => {
   button.addEventListener('click', () => {
     showToast('Переход в соцсеть');
   });
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> 737dd30 (Update VELARO site)
