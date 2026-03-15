@@ -2,6 +2,7 @@
   const STORAGE_KEYS = {
     cars: 'fresh_cars',
     cart: 'fresh_cart',
+    favorites: 'fresh_favorites',
     users: 'fresh_users',
     session: 'fresh_session'
   };
@@ -60,6 +61,11 @@
       save(STORAGE_KEYS.cart, []);
     }
 
+    const favorites = load(STORAGE_KEYS.favorites, null);
+    if (!Array.isArray(favorites)) {
+      save(STORAGE_KEYS.favorites, []);
+    }
+
     const users = load(STORAGE_KEYS.users, null);
     if (!Array.isArray(users)) {
       save(STORAGE_KEYS.users, []);
@@ -72,6 +78,14 @@
 
   function getCart() {
     return load(STORAGE_KEYS.cart, []);
+  }
+
+  function getFavorites() {
+    return load(STORAGE_KEYS.favorites, []);
+  }
+
+  function getSession() {
+    return load(STORAGE_KEYS.session, null);
   }
 
   function getUsers() {
@@ -155,13 +169,10 @@
   }
 
   function carCardMarkup(car) {
+    const favoriteClass = getFavorites().includes(car.id) ? ' active' : '';
     return `
       <article class="car-card">
         <img class="car-thumb" src="${car.image || ''}" alt="${car.brand} ${car.model}" />
-<<<<<<< HEAD
-=======
-        <button class="car-fav-btn" type="button" data-favorite="${car.id}" aria-label="Избранное">♡</button>
->>>>>>> 737dd30 (Update VELARO site)
         <div class="car-meta">
           <h3>${car.brand} ${car.model}</h3>
           <p>${car.year} · ${new Intl.NumberFormat('ru-RU').format(car.mileage)} км</p>
@@ -170,6 +181,7 @@
         <div class="car-actions">
           <a class="btn btn-outline" href="product.html?id=${car.id}">Подробнее</a>
           <button class="btn btn-primary" type="button" data-add-cart="${car.id}">В корзину</button>
+          <button class="car-fav-btn${favoriteClass}" type="button" data-favorite="${car.id}" aria-label="В избранное">❤</button>
         </div>
       </article>
     `;
@@ -177,6 +189,7 @@
 
   function carCatalogCardMarkup(car) {
     const monthly = Math.round(car.price / 68);
+    const favoriteClass = getFavorites().includes(car.id) ? ' active' : '';
     const badgeClass = (badge) => {
       const norm = normalize(badge);
       if (norm.includes('один владелец')) return 'is-warm';
@@ -193,10 +206,7 @@
         <a class="catalog-card-link" href="product.html?id=${car.id}">
           <div class="catalog-photo-wrap">
             <img class="catalog-photo" src="${car.image || ''}" alt="${car.brand} ${car.model}" />
-<<<<<<< HEAD
-=======
-            <button class="catalog-fav" type="button" data-favorite="${car.id}" aria-label="Избранное">♡</button>
->>>>>>> 737dd30 (Update VELARO site)
+            <button class="catalog-fav${favoriteClass}" type="button" data-favorite="${car.id}" aria-label="В избранное">❤</button>
           </div>
           <div class="catalog-body">
             <div class="catalog-headline">
@@ -235,28 +245,29 @@
     });
   }
 
-
   function bindFavoriteButtons(root) {
-    const favorites = getFavorites();
     root.querySelectorAll('[data-favorite]').forEach((button) => {
-      const carId = Number(button.getAttribute('data-favorite'));
-      const isActive = favorites.includes(carId);
-      button.classList.toggle('active', isActive);
-      button.textContent = isActive ? '♥' : '♡';
       button.addEventListener('click', (event) => {
         event.preventDefault();
         event.stopPropagation();
-        const current = getFavorites();
-        const exists = current.includes(carId);
-        const next = exists ? current.filter((id) => id !== carId) : [...current, carId];
-        save(STORAGE_KEYS.favorites, next);
+        const carId = Number(button.getAttribute('data-favorite'));
+        if (!carId) {
+          return;
+        }
+        const favorites = getFavorites();
+        const exists = favorites.includes(carId);
+        const nextFavorites = exists
+          ? favorites.filter((id) => id !== carId)
+          : [...favorites, carId];
+        save(STORAGE_KEYS.favorites, nextFavorites);
         button.classList.toggle('active', !exists);
-        button.textContent = !exists ? '♥' : '♡';
-        showToast(!exists ? 'Добавлено в избранное' : 'Удалено из избранного');
+
+        document.querySelectorAll(`[data-favorite="${carId}"]`).forEach((item) => {
+          item.classList.toggle('active', !exists);
+        });
       });
     });
   }
-
 
   function initHomePage() {
     const featured = document.querySelector('[data-featured]');
@@ -277,7 +288,6 @@
         ? items.map(carCardMarkup).join('')
         : '<p class="empty">По вашему запросу ничего не найдено.</p>';
       bindAddToCart(featured);
-
       bindFavoriteButtons(featured);
     }
 
@@ -369,9 +379,6 @@
     }
 
     function renderPagination(totalPages) {
-
-      // Пагинация нужна только если страниц больше одной.
-
       if (totalPages <= 1) {
         pagination.innerHTML = '';
         return;
@@ -392,8 +399,6 @@
     }
 
     function syncUrl() {
-
-      // Сохраняем фильтры и текущую страницу в URL.
       const next = new URL(window.location.href);
       const brand = brandSelect ? brandSelect.value : '';
       const model = modelSelect ? modelSelect.value : '';
@@ -428,9 +433,7 @@
         ? pageCars.map(carCatalogCardMarkup).join('')
         : '<p class="empty">По вашему запросу авто не найдено.</p>';
       bindAddToCart(list);
-
       bindFavoriteButtons(list);
-
       renderPagination(totalPages);
       syncUrl();
     }
@@ -500,12 +503,8 @@
         <div class="p-actions">
           <button class="btn btn-primary" type="button" data-add-cart="${car.id}">В корзину</button>
           <button class="btn p-call-btn" type="button" data-product-call>Позвонить</button>
-<<<<<<< HEAD
+          <button class="btn btn-outline p-fav-btn${getFavorites().includes(car.id) ? ' active' : ''}" type="button" data-favorite="${car.id}">❤ В избранное</button>
           <a class="btn btn-outline" href="catalog.html">В каталог</a>
-=======
-          <button class="btn btn-outline" type="button" data-favorite="${car.id}">В избранное</button>
-          <a class="btn btn-outline p-to-catalog" href="catalog.html">В каталог</a>
->>>>>>> 737dd30 (Update VELARO site)
         </div>
 
         <section class="p-section">
@@ -569,10 +568,7 @@
       </article>
     `;
     bindAddToCart(root);
-
-
     bindFavoriteButtons(root);
-
 
     const mainImage = root.querySelector('[data-main-image]');
     root.querySelectorAll('[data-thumb]').forEach((button) => {
@@ -867,6 +863,97 @@
 
   }
 
+  function initProfilePage() {
+    const root = document.querySelector('[data-profile-root]');
+    if (!root) {
+      return;
+    }
+
+    const session = getSession();
+    if (!session || !session.email) {
+      root.innerHTML = `
+        <section class="profile-card">
+          <h1 class="section-title">Личный кабинет</h1>
+          <p class="profile-subtitle">Для доступа к кабинету выполните вход.</p>
+          <a class="btn btn-primary" href="register.html">Войти или зарегистрироваться</a>
+        </section>
+      `;
+      return;
+    }
+
+    function render() {
+      const favorites = getFavorites();
+      const favoriteCars = getCars().filter((car) => favorites.includes(car.id));
+
+      root.innerHTML = `
+        <section class="profile-card">
+          <h1 class="section-title">Личный кабинет</h1>
+          <div class="profile-grid">
+            <div class="profile-item">
+              <span>Имя</span>
+              <strong>${session.name || 'Пользователь'}</strong>
+            </div>
+            <div class="profile-item">
+              <span>Email</span>
+              <strong>${session.email}</strong>
+            </div>
+            <div class="profile-item">
+              <span>Товаров в корзине</span>
+              <strong>${getCart().length}</strong>
+            </div>
+            <div class="profile-item">
+              <span>В избранном</span>
+              <strong>${favoriteCars.length}</strong>
+            </div>
+          </div>
+          <div class="profile-actions">
+            <a class="btn btn-outline" href="catalog.html">В каталог</a>
+            <button class="btn btn-primary" type="button" data-profile-logout>Выйти</button>
+          </div>
+        </section>
+
+        <section class="profile-card profile-favorites">
+          <h2 class="section-title">Избранные автомобили</h2>
+          ${
+            favoriteCars.length
+              ? favoriteCars.map((car) => `
+                <article class="profile-fav-item">
+                  <img src="${car.image || ''}" alt="${car.brand} ${car.model}">
+                  <div>
+                    <h3>${car.brand} ${car.model}</h3>
+                    <p>${car.year} · ${new Intl.NumberFormat('ru-RU').format(car.mileage)} км</p>
+                    <strong>${formatPrice(car.price)}</strong>
+                  </div>
+                  <div class="profile-fav-actions">
+                    <a class="btn btn-outline" href="product.html?id=${car.id}">Открыть</a>
+                    <button class="car-fav-btn active" type="button" data-favorite="${car.id}" aria-label="Убрать из избранного">❤</button>
+                  </div>
+                </article>
+              `).join('')
+              : '<p class="empty">В избранном пока нет автомобилей.</p>'
+          }
+        </section>
+      `;
+
+      const logoutBtn = root.querySelector('[data-profile-logout]');
+      if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+          localStorage.removeItem(STORAGE_KEYS.session);
+          window.location.href = 'register.html';
+        });
+      }
+
+      bindFavoriteButtons(root);
+      root.querySelectorAll('.profile-fav-item [data-favorite]').forEach((button) => {
+        button.addEventListener('click', () => {
+          setTimeout(render, 0);
+        });
+      });
+    }
+
+    render();
+  }
+
   function initAdminPage() {
     const tbody = document.querySelector('[data-admin-body]');
     const form = document.querySelector('[data-admin-form]');
@@ -927,6 +1014,8 @@
           save(STORAGE_KEYS.cars, nextCars);
           const nextCart = getCart().filter((item) => item !== id);
           save(STORAGE_KEYS.cart, nextCart);
+          const nextFavorites = getFavorites().filter((item) => item !== id);
+          save(STORAGE_KEYS.favorites, nextFavorites);
           renderTable();
           updateCartBadge();
           setStatus(`Авто ID ${id} удалено`);
@@ -1010,6 +1099,9 @@
   }
   if (page === 'register') {
     initRegisterPage();
+  }
+  if (page === 'profile') {
+    initProfilePage();
   }
   if (page === 'admin') {
     initAdminPage();
