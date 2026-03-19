@@ -3,27 +3,32 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VELARO - Корзина</title>
+  <title>ALMOCAR - Корзина</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=20260315" />
+  <link rel="stylesheet" href="assets/styles/styles.css?v=20260315" />
 </head>
 <body data-page="cart">
   <main class="site">
     <header class="panel header">
       <div class="header-row">
-        <a class="logo" href="index.html">VELARO</a>
+        <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="ALMOCAR" height="30"></a>
         <div class="cart-pill">Корзина: <strong data-cart-count>0</strong></div>
         <button class="menu-btn" type="button" data-menu-toggle>&#9776;</button>
       </div>
       <nav class="nav" data-main-nav>
+        <div class="nav-head">
+          <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="ALMOCAR" height="30"></a>
+          <button class="menu-close-btn" type="button" data-menu-close>&times;</button>
+        </div>
         <a class="nav-link" href="catalog.html">Каталог</a>
         <a class="nav-link active" href="cart.html">Корзина</a>
         <a class="nav-link" href="register.html">Регистрация</a>
         <a class="nav-link" href="profile.html">Личный кабинет</a>
         <a class="nav-link" href="admin.html">Админ</a>
       </nav>
+<div class="sidebar-overlay" data-menu-overlay></div>
     </header>
 
     <section class="panel section cart-layout">
@@ -35,7 +40,7 @@
     </section>
 
         <footer class="m-footer m-card">
-  <a class="logo" href="index.html">VELARO</a>
+  <a class="logo" href="index.html"><img src="assets/images/logo.png" alt="ALMOCAR" height="30"></a>
   <div class="m-footer-grid">
     <div>
       <h5>Навигация</h5>
@@ -61,10 +66,10 @@
     </div>
     <p class="m-map-caption">Казань, проспект Победы, 141</p>
   </div>
-  <p class="m-footer-copy">© 2026 VELARO. Все права защищены.</p>
+  <p class="m-footer-copy">© 2026 ALMOCAR. Все права защищены.</p>
 </footer>
   </main>
-  <script src="app.js?v=20260315"></script>
+  <script src="assets/scripts/app.js?v=20260315"></script>
 </body>
 </html>
 

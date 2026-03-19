@@ -9,18 +9,18 @@
   };
 
   const seedCars = [
-    { id: 1, brand: 'BMW', model: 'X5', year: 2022, mileage: 38000, price: 4590000, color: 'linear-gradient(135deg,#d8e6ff,#88a7d6)', image: 'assets/cars/bmwx5.webp', badges: ['Без ДТП', 'Зелёная автотека', 'Один владелец', 'Оригинал ПТС'] },
-    { id: 2, brand: 'Kia', model: 'Sportage', year: 2021, mileage: 52000, price: 2390000, color: 'linear-gradient(135deg,#f3f4f6,#aab4c0)', image: 'assets/cars/sportage.webp', badges: ['Без ДТП', 'Один владелец', 'Оригинал ПТС', 'Отличное состояние'] },
-    { id: 3, brand: 'Toyota', model: 'Camry', year: 2020, mileage: 64000, price: 2790000, color: 'linear-gradient(135deg,#f8fbff,#95b4de)', image: 'assets/cars/camry.webp', badges: ['Чистый отчет', 'Зелёная автотека', 'Оригинал ПТС'] },
-    { id: 4, brand: 'Audi', model: 'A6', year: 2019, mileage: 71000, price: 3190000, color: 'linear-gradient(135deg,#e8eef7,#91a4bf)', image: 'assets/cars/audia6.webp', badges: ['Без ДТП', 'Один владелец', 'Чистый отчет'] },
-    { id: 5, brand: 'Hyundai', model: 'Tucson', year: 2023, mileage: 19000, price: 2990000, color: 'linear-gradient(135deg,#eff6ff,#8fb3e5)', image: 'assets/cars/tucson.webp', badges: ['Отличное состояние', 'Оригинал ПТС', 'Зелёная автотека'] },
-    { id: 6, brand: 'Lada', model: 'Vesta', year: 2022, mileage: 26000, price: 1390000, color: 'linear-gradient(135deg,#f6f7f9,#c4ccd8)', image: 'assets/cars/vesta.webp', badges: ['Один владелец', 'Без ДТП'] },
-    { id: 7, brand: 'BMW', model: 'X5', year: 2022, mileage: 38000, price: 4590000, color: 'linear-gradient(135deg,#d8e6ff,#88a7d6)', image: 'assets/cars/bmwx5.webp', badges: ['Без ДТП', 'Зелёная автотека', 'Один владелец', 'Оригинал ПТС'] },
-    { id: 8, brand: 'Kia', model: 'Sportage', year: 2021, mileage: 52000, price: 2390000, color: 'linear-gradient(135deg,#f3f4f6,#aab4c0)', image: 'assets/cars/sportage.webp', badges: ['Без ДТП', 'Один владелец', 'Оригинал ПТС', 'Отличное состояние'] },
-    { id: 9, brand: 'Toyota', model: 'Camry', year: 2020, mileage: 64000, price: 2790000, color: 'linear-gradient(135deg,#f8fbff,#95b4de)', image: 'assets/cars/camry.webp', badges: ['Чистый отчет', 'Зелёная автотека', 'Оригинал ПТС'] },
-    { id: 10, brand: 'Audi', model: 'A6', year: 2019, mileage: 71000, price: 3190000, color: 'linear-gradient(135deg,#e8eef7,#91a4bf)', image: 'assets/cars/audia6.webp', badges: ['Без ДТП', 'Один владелец', 'Чистый отчет'] },
-    { id: 11, brand: 'Hyundai', model: 'Tucson', year: 2023, mileage: 19000, price: 2990000, color: 'linear-gradient(135deg,#eff6ff,#8fb3e5)', image: 'assets/cars/tucson.webp', badges: ['Отличное состояние', 'Оригинал ПТС', 'Зелёная автотека'] },
-    { id: 12, brand: 'Lada', model: 'Vesta', year: 2022, mileage: 26000, price: 1390000, color: 'linear-gradient(135deg,#f6f7f9,#c4ccd8)', image: 'assets/cars/vesta.webp', badges: ['Один владелец', 'Без ДТП'] }
+    { id: 1, brand: 'BMW', model: 'X5', year: 2022, mileage: 38000, price: 4590000, color: 'linear-gradient(135deg,#d8e6ff,#88a7d6)', image: 'assets/images/cars/bmwx5.webp', badges: ['Без ДТП', 'Зелёная автотека', 'Один владелец', 'Оригинал ПТС'] },
+    { id: 2, brand: 'Kia', model: 'Sportage', year: 2021, mileage: 52000, price: 2390000, color: 'linear-gradient(135deg,#f3f4f6,#aab4c0)', image: 'assets/images/cars/sportage.webp', badges: ['Без ДТП', 'Один владелец', 'Оригинал ПТС', 'Отличное состояние'] },
+    { id: 3, brand: 'Toyota', model: 'Camry', year: 2020, mileage: 64000, price: 2790000, color: 'linear-gradient(135deg,#f8fbff,#95b4de)', image: 'assets/images/cars/camry.webp', badges: ['Чистый отчет', 'Зелёная автотека', 'Оригинал ПТС'] },
+    { id: 4, brand: 'Audi', model: 'A6', year: 2019, mileage: 71000, price: 3190000, color: 'linear-gradient(135deg,#e8eef7,#91a4bf)', image: 'assets/images/cars/audia6.webp', badges: ['Без ДТП', 'Один владелец', 'Чистый отчет'] },
+    { id: 5, brand: 'Hyundai', model: 'Tucson', year: 2023, mileage: 19000, price: 2990000, color: 'linear-gradient(135deg,#eff6ff,#8fb3e5)', image: 'assets/images/cars/tucson.webp', badges: ['Отличное состояние', 'Оригинал ПТС', 'Зелёная автотека'] },
+    { id: 6, brand: 'Lada', model: 'Vesta', year: 2022, mileage: 26000, price: 1390000, color: 'linear-gradient(135deg,#f6f7f9,#c4ccd8)', image: 'assets/images/cars/vesta.webp', badges: ['Один владелец', 'Без ДТП'] },
+    { id: 7, brand: 'BMW', model: 'X5', year: 2022, mileage: 38000, price: 4590000, color: 'linear-gradient(135deg,#d8e6ff,#88a7d6)', image: 'assets/images/cars/bmwx5.webp', badges: ['Без ДТП', 'Зелёная автотека', 'Один владелец', 'Оригинал ПТС'] },
+    { id: 8, brand: 'Kia', model: 'Sportage', year: 2021, mileage: 52000, price: 2390000, color: 'linear-gradient(135deg,#f3f4f6,#aab4c0)', image: 'assets/images/cars/sportage.webp', badges: ['Без ДТП', 'Один владелец', 'Оригинал ПТС', 'Отличное состояние'] },
+    { id: 9, brand: 'Toyota', model: 'Camry', year: 2020, mileage: 64000, price: 2790000, color: 'linear-gradient(135deg,#f8fbff,#95b4de)', image: 'assets/images/cars/camry.webp', badges: ['Чистый отчет', 'Зелёная автотека', 'Оригинал ПТС'] },
+    { id: 10, brand: 'Audi', model: 'A6', year: 2019, mileage: 71000, price: 3190000, color: 'linear-gradient(135deg,#e8eef7,#91a4bf)', image: 'assets/images/cars/audia6.webp', badges: ['Без ДТП', 'Один владелец', 'Чистый отчет'] },
+    { id: 11, brand: 'Hyundai', model: 'Tucson', year: 2023, mileage: 19000, price: 2990000, color: 'linear-gradient(135deg,#eff6ff,#8fb3e5)', image: 'assets/images/cars/tucson.webp', badges: ['Отличное состояние', 'Оригинал ПТС', 'Зелёная автотека'] },
+    { id: 12, brand: 'Lada', model: 'Vesta', year: 2022, mileage: 26000, price: 1390000, color: 'linear-gradient(135deg,#f6f7f9,#c4ccd8)', image: 'assets/images/cars/vesta.webp', badges: ['Один владелец', 'Без ДТП'] }
   ];
 
   function load(key, fallback) {
@@ -1247,12 +1247,51 @@
   function setupMobileMenu() {
     const toggle = document.querySelector('[data-menu-toggle]');
     const nav = document.querySelector('[data-main-nav]');
+
     if (!toggle || !nav) {
       return;
     }
-    toggle.addEventListener('click', () => {
-      nav.classList.toggle('open');
-    });
+
+    // Inject nav head (logo and close button) if it doesn't exist
+    if (!nav.querySelector('.nav-head')) {
+      const head = document.createElement('div');
+      head.className = 'nav-head';
+      head.innerHTML = '<a class="logo" href="index.html"><img src="assets/images/logo.png" alt="ALMOCAR" height="30"></a><button class="menu-close-btn" type="button" data-menu-close>&times;</button>';
+      nav.insertBefore(head, nav.firstChild);
+    }
+
+    // Inject overlay if it doesn't exist
+    let overlay = document.querySelector('[data-menu-overlay]');
+    if (!overlay) {
+      overlay = document.createElement('div');
+      overlay.className = 'sidebar-overlay';
+      overlay.setAttribute('data-menu-overlay', '');
+      document.body.appendChild(overlay);
+    }
+
+    const closeBtn = document.querySelector('[data-menu-close]');
+
+    function openMenu() {
+      nav.classList.add('open');
+      if (overlay) overlay.classList.add('active');
+      document.body.style.overflow = 'hidden'; // preserve scrolling
+    }
+
+    function closeMenu() {
+      nav.classList.remove('open');
+      if (overlay) overlay.classList.remove('active');
+      document.body.style.overflow = '';
+    }
+
+    toggle.addEventListener('click', openMenu);
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', closeMenu);
+    }
+    
+    if (overlay) {
+      overlay.addEventListener('click', closeMenu);
+    }
   }
 
   ensureStorage();
